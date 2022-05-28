@@ -1,5 +1,7 @@
 # friendly_custom_bets_app
 
+[![codecov](https://codecov.io/gh/thoKling/FriendlyCustomBetsApp/branch/main/graph/badge.svg)](https://codecov.io/gh/thoKling/FriendlyCustomBetsApp)
+
 Paris
 
 ## Getting Started
