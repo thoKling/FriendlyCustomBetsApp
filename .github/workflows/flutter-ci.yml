@@ -27,5 +27,16 @@ jobs:
       # Build generated classes
       # - run: flutter pub run build_runner build
 
-      - run: flutter test
+      # Analyze project
+      - run: flutter analyze
+
+      # Run tests
+      - run: flutter test --coverage
+
+      # Upload codecoverage to app.codecov.io
+      - uses: codecov/codecov-action@v1.0.2
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ./coverage/lcov.info
+
 
