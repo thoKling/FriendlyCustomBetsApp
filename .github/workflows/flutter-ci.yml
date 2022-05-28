@@ -15,6 +15,7 @@ jobs:
     # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       # Setup the flutter environment.
       - uses: subosito/flutter-action@v2
         with:
