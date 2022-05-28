@@ -55,6 +55,7 @@ class _MainScreen extends StatelessWidget {
     if (bottomNavigationCubit.state.navbarItems.length > 1) {
       /// Pop managed internally by navbar
       bottomNavigationCubit.pop();
+
       return false;
     } else {
       /// Pop managed normally

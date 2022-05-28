@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:friendly_custom_bets_app/ui/main/main_screen.dart';
+import 'package:flutter_i18n/flutter_i18n_delegate.dart';
+import 'package:flutter_i18n/loaders/file_translation_loader.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:friendly_custom_bets_app/ui/theme/theme.dart';
 
 import 'business/navigation/my_router.dart';
@@ -20,8 +22,29 @@ class _FriendlyCustomBetsAppState extends State<FriendlyCustomBetsApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: appTheme,
-      home: const MainScreen(),
-      // Routes
+
+      /// Translations
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('fr', 'FR'),
+      ],
+      localizationsDelegates: [
+        FlutterI18nDelegate(
+          translationLoader: FileTranslationLoader(
+            fallbackFile: "en",
+            basePath: "assets/i18n",
+          ),
+          missingTranslationHandler: (key, locale) {
+            debugPrint(
+              "--- Missing Key: $key, languageCode: ${locale!.languageCode}",
+            );
+          },
+        ),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+
+      /// Routes
       initialRoute: Routes.login,
       navigatorKey: _navigatorKey,
       onGenerateRoute: (RouteSettings settings) => MyRouter.route(settings),

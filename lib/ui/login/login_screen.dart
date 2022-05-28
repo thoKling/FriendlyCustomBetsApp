@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:friendly_custom_bets_app/business/navigation/routes.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -10,7 +11,9 @@ class LoginScreen extends StatelessWidget {
       child: TextButton(
         onPressed: () => Navigator.of(context)
             .pushNamed(Routes.main), //TODO: vrai login avec OAuth
-        child: const Text("Login"), //TODO: lang
+        child: Text(
+          FlutterI18n.translate(context, "login"),
+        ),
       ),
     );
   }
