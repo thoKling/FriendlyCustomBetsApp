@@ -18,7 +18,7 @@ void main() {
           cubit.setNavBarItem(BottomBarItems.leaderboard),
       expect: () => [
         BottomBarNavigationState(
-            [BottomBarItems.home, BottomBarItems.leaderboard])
+            const [BottomBarItems.home, BottomBarItems.leaderboard])
       ],
     );
 
@@ -27,13 +27,13 @@ void main() {
       build: () => BottomBarNavigationCubit(),
       act: (BottomBarNavigationCubit cubit) =>
           cubit..setNavBarItem(BottomBarItems.home),
-      seed: () => BottomBarNavigationState([
+      seed: () => BottomBarNavigationState(const [
         BottomBarItems.home,
         BottomBarItems.leaderboard,
         BottomBarItems.settings
       ]),
       expect: () => [
-        BottomBarNavigationState([BottomBarItems.home]),
+        BottomBarNavigationState(const [BottomBarItems.home]),
       ],
     );
 
@@ -42,9 +42,9 @@ void main() {
       build: () => BottomBarNavigationCubit(),
       act: (BottomBarNavigationCubit cubit) => cubit..pop(),
       seed: () => BottomBarNavigationState(
-          [BottomBarItems.home, BottomBarItems.settings]),
+          const [BottomBarItems.home, BottomBarItems.settings]),
       expect: () => [
-        BottomBarNavigationState([BottomBarItems.home]),
+        BottomBarNavigationState(const [BottomBarItems.home]),
       ],
     );
 
@@ -55,9 +55,9 @@ void main() {
         ..pop()
         ..pop(),
       seed: () => BottomBarNavigationState(
-          [BottomBarItems.home, BottomBarItems.settings]),
+          const [BottomBarItems.home, BottomBarItems.settings]),
       expect: () => [
-        BottomBarNavigationState([BottomBarItems.home]),
+        BottomBarNavigationState(const [BottomBarItems.home]),
       ],
       errors: () => [isA<AssertionError>()],
     );

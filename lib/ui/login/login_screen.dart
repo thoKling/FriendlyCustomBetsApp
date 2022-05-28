@@ -8,7 +8,7 @@ class LoginScreen extends StatelessWidget {
     return Center(
       child: TextButton(
         onPressed: () {}, //TODO: bind
-        child: Text("Login"), //TODO: lang
+        child: const Text("Login"), //TODO: lang
       ),
     );
   }
