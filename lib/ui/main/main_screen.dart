@@ -15,18 +15,25 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<BottomBarNavigationCubit>(
       create: (context) => BottomBarNavigationCubit(),
+      child: _MainScreen(),
+    );
+  }
+}
 
-      /// WillPopScope widget will register the callback to manage the back navigation action
-      child: WillPopScope(
-        onWillPop: () => _navigateBack(context),
-        child: Scaffold(
-          appBar: AppBar(title: const Text("TODO")),
-          body: BlocBuilder<BottomBarNavigationCubit, BottomBarNavigationState>(
-            builder: (context, state) =>
-                _mainScreenRooter(state.currentNavBarItem),
-          ),
-          bottomNavigationBar: const BottomBarWidget(),
+/// Separate class because of context problem with WillPopScope see: https://github.com/felangel/bloc/issues/1784
+class _MainScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    /// WillPopScope widget will register the callback to manage the back navigation action
+    return WillPopScope(
+      onWillPop: () async => _navigateBack(context),
+      child: Scaffold(
+        appBar: AppBar(title: const Text("TODO")),
+        body: BlocBuilder<BottomBarNavigationCubit, BottomBarNavigationState>(
+          builder: (context, state) =>
+              _mainScreenRooter(state.currentNavBarItem),
         ),
+        bottomNavigationBar: const BottomBarWidget(),
       ),
     );
   }
@@ -42,16 +49,16 @@ class MainScreen extends StatelessWidget {
     }
   }
 
-  Future<bool> _navigateBack(BuildContext context) {
+  bool _navigateBack(BuildContext context) {
     BottomBarNavigationCubit bottomNavigationCubit =
         BlocProvider.of<BottomBarNavigationCubit>(context);
     if (bottomNavigationCubit.state.navbarItems.length > 1) {
       /// Pop managed internally by navbar
       bottomNavigationCubit.pop();
-      return Future(() => false);
+      return false;
     } else {
       /// Pop managed normally
-      return Future(() => true);
+      return true;
     }
   }
 }
