@@ -50,6 +50,7 @@ dependencies:
 
   # For rest requests
   retrofit: ^3.0.1+1
+  dio: ^4.0.6
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -67,13 +68,13 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
   dart_code_metrics: ^4.12.0
 
   # To generate retrofit classes
   retrofit_generator: ^4.0.1
 
-  # To generate models
+  # To generate modelsflutter pub upgrade --major-versions
   build_runner: ^2.1.11
   json_serializable: ^6.2.0
 
