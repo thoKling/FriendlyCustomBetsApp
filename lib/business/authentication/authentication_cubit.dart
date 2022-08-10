@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:friendly_custom_bets_app/rest/clients/tournaments_client.dart';
 
 import '../../rest/clients/authentication_client.dart';
 import 'authentication_constants.dart';
@@ -37,6 +38,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       final idToken = _parseIdToken(result.idToken ?? "");
 
       AuthenticationClient.setAuthorizationToken(result.accessToken ?? "");
+
+      TournamentsClient.setAuthorizationToken(result.idToken ?? "");
 
       final profile = await AuthenticationClient().getUserDetails();
 
