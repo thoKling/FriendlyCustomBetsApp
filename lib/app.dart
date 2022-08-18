@@ -4,9 +4,11 @@ import 'package:flutter_i18n/flutter_i18n_delegate.dart';
 import 'package:flutter_i18n/loaders/file_translation_loader.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:friendly_custom_bets_app/business/authentication/authentication_cubit.dart';
+import 'package:friendly_custom_bets_app/business/navigation/navigation_cubit.dart';
+import 'package:friendly_custom_bets_app/business/tournaments/tournaments_cubit.dart';
 import 'package:friendly_custom_bets_app/ui/theme/theme.dart';
 
-import 'business/navigation/my_router.dart';
+import 'business/navigation/app_router.dart';
 import 'business/navigation/routes.dart';
 
 class FriendlyCustomBetsApp extends StatefulWidget {
@@ -23,8 +25,14 @@ class _FriendlyCustomBetsAppState extends State<FriendlyCustomBetsApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<NavigationCubit>(
+          create: (BuildContext context) => NavigationCubit(_navigatorKey),
+        ),
         BlocProvider<AuthenticationCubit>(
           create: (BuildContext context) => AuthenticationCubit(),
+        ),
+        BlocProvider<TournamentsCubit>(
+          create: (BuildContext context) => TournamentsCubit(),
         ),
       ],
       child: MaterialApp(
@@ -55,7 +63,7 @@ class _FriendlyCustomBetsAppState extends State<FriendlyCustomBetsApp> {
         /// Routes
         initialRoute: Routes.login,
         navigatorKey: _navigatorKey,
-        onGenerateRoute: (RouteSettings settings) => MyRouter.route(settings),
+        onGenerateRoute: (RouteSettings settings) => AppRouter.route(settings),
       ),
     );
   }

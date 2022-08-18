@@ -52,6 +52,12 @@ dependencies:
   retrofit: ^3.0.1+1
   dio: ^4.0.6
 
+  # Annotations used by json_serializable to create code for JSON serialization
+  json_annotation: ^4.6.0
+
+  # For making toast without BuildContext
+  fluttertoast: ^8.0.9
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

@@ -27,13 +27,15 @@ class _MainScreen extends StatelessWidget {
     /// WillPopScope widget will register the callback to manage the back navigation action
     return WillPopScope(
       onWillPop: () async => _navigateBack(context),
-      child: Scaffold(
-        appBar: AppBar(title: const Text("TODO")),
-        body: BlocBuilder<BottomBarNavigationCubit, BottomBarNavigationState>(
-          builder: (context, state) =>
-              _mainScreenRooter(state.currentNavBarItem),
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(title: const Text("TODO")),
+          body: BlocBuilder<BottomBarNavigationCubit, BottomBarNavigationState>(
+            builder: (context, state) =>
+                _mainScreenRooter(state.currentNavBarItem),
+          ),
+          bottomNavigationBar: const BottomBarWidget(),
         ),
-        bottomNavigationBar: const BottomBarWidget(),
       ),
     );
   }

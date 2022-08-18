@@ -2,33 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:friendly_custom_bets_app/business/authentication/authentication_cubit.dart';
-import 'package:friendly_custom_bets_app/rest/clients/tournaments_client.dart';
+import 'package:friendly_custom_bets_app/business/navigation/navigation_cubit.dart';
+import 'package:friendly_custom_bets_app/business/navigation/routes.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextButton(
-          onPressed: () => context.read<AuthenticationCubit>().loginAction(),
-          child: Text(
-            FlutterI18n.translate(context, "login"),
-          ),
-        ),
-        TextButton(
-          onPressed: _fetchTournaments,
-          child: Text(
-            FlutterI18n.translate(context, "getTournaments"),
-          ),
-        ),
-      ],
-    );
-  }
+    return SafeArea(
+      child: Scaffold(
+        body: BlocConsumer<AuthenticationCubit, AuthenticationState>(
+          listener: (BuildContext context, AuthenticationState state) {
+            if (state.loginState == LoginState.loggedIn) {
+              context.read<NavigationCubit>().addRoute(Routes.tournamentsList);
+            }
+          },
+          builder: (BuildContext context, AuthenticationState state) {
+            if (state.loginState == LoginState.loading) {
+              const Center(child: CircularProgressIndicator());
+            }
 
-  void _fetchTournaments() async {
-    String test = await TournamentsClient().myTournaments();
-    debugPrint(test);
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                  onPressed: () =>
+                      context.read<AuthenticationCubit>().loginAction(),
+                  child: Text(
+                    FlutterI18n.translate(context, "login"),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
   }
 }
