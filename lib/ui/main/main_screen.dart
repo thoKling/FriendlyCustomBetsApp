@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendly_custom_bets_app/business/main/main_screen_navigation/bottom_bar_cubit.dart';
-import 'package:friendly_custom_bets_app/business/main/main_screen_navigation/main_navigator_observer.dart';
 
 import '../../business/main/main_screen_navigation/main_screen_router.dart';
+import '../../business/navigation/navigation_observer.dart';
 import '../../business/navigation/navigation_service.dart';
 import 'app_bar_widget.dart';
 import 'bottom_bar_widget.dart';
@@ -41,7 +41,7 @@ class _MainScreen extends StatelessWidget {
             key: mainScreenNavKey,
             onGenerateRoute: (RouteSettings settings) =>
                 MainScreenRouter.route(settings),
-            observers: [MainNavigatorObserver(context.read<BottomBarCubit>())],
+            observers: [NavigationObserver(context.read<BottomBarCubit>())],
           ),
           bottomNavigationBar: const BottomBarWidget(),
         ),

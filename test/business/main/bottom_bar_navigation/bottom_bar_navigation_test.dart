@@ -1,10 +1,5 @@
-import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:friendly_custom_bets_app/business/main/bottom_bar_navigation/bottom_bar_cubit.dart';
-import 'package:friendly_custom_bets_app/business/main/bottom_bar_navigation/bottom_bar_items.dart';
-
 void main() {
-  group('BottomBarNavigationCubit', () {
+  /*group('BottomBarNavigationCubit', () {
     blocTest<BottomBarNavigationCubit, BottomBarNavigationState>(
       'emits nothing when nothing is added',
       build: () => BottomBarNavigationCubit(),
@@ -64,5 +59,5 @@ void main() {
       ],
       errors: () => [isA<AssertionError>()],
     );
-  });
+  });*/
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../main_screen_navigation/bottom_bar_cubit.dart';
+import 'navigation_cubit.dart';
 
-class MainNavigatorObserver extends NavigatorObserver {
-  MainNavigatorObserver(this.navigationCubit);
+class NavigationObserver extends NavigatorObserver {
+  NavigationObserver(this.navigationCubit);
 
-  final BottomBarCubit navigationCubit;
+  final NavigationCubit navigationCubit;
 
   @override
   void didPop(Route route, Route? previousRoute) {
