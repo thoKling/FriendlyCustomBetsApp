@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:friendly_custom_bets_app/business/main/bottom_bar_navigation/bottom_bar_cubit.dart';
 import 'package:friendly_custom_bets_app/business/main/bottom_bar_navigation/bottom_bar_items.dart';
-import 'package:friendly_custom_bets_app/business/main/bottom_bar_navigation/bottom_bar_navigation_cubit.dart';
 
 void main() {
   group('BottomBarNavigationCubit', () {
@@ -18,7 +18,7 @@ void main() {
           cubit.setNavBarItem(BottomBarItems.leaderboard),
       expect: () => [
         BottomBarNavigationState(
-          const [BottomBarItems.home, BottomBarItems.leaderboard],
+          const [BottomBarItems.games, BottomBarItems.leaderboard],
         ),
       ],
     );
@@ -27,14 +27,14 @@ void main() {
       'emits BottomBarNavigationState([home]) from BottomBarNavigationState([home, leaderboard, settings]) when home is added',
       build: () => BottomBarNavigationCubit(),
       act: (BottomBarNavigationCubit cubit) =>
-          cubit..setNavBarItem(BottomBarItems.home),
+          cubit..setNavBarItem(BottomBarItems.games),
       seed: () => BottomBarNavigationState(const [
-        BottomBarItems.home,
+        BottomBarItems.games,
         BottomBarItems.leaderboard,
         BottomBarItems.settings,
       ]),
       expect: () => [
-        BottomBarNavigationState(const [BottomBarItems.home]),
+        BottomBarNavigationState(const [BottomBarItems.games]),
       ],
     );
 
@@ -43,10 +43,10 @@ void main() {
       build: () => BottomBarNavigationCubit(),
       act: (BottomBarNavigationCubit cubit) => cubit..pop(),
       seed: () => BottomBarNavigationState(
-        const [BottomBarItems.home, BottomBarItems.settings],
+        const [BottomBarItems.games, BottomBarItems.settings],
       ),
       expect: () => [
-        BottomBarNavigationState(const [BottomBarItems.home]),
+        BottomBarNavigationState(const [BottomBarItems.games]),
       ],
     );
 
@@ -57,10 +57,10 @@ void main() {
         ..pop()
         ..pop(),
       seed: () => BottomBarNavigationState(
-        const [BottomBarItems.home, BottomBarItems.settings],
+        const [BottomBarItems.games, BottomBarItems.settings],
       ),
       expect: () => [
-        BottomBarNavigationState(const [BottomBarItems.home]),
+        BottomBarNavigationState(const [BottomBarItems.games]),
       ],
       errors: () => [isA<AssertionError>()],
     );

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendly_custom_bets_app/business/main/bottom_bar_navigation/bottom_bar_items.dart';
-import 'package:friendly_custom_bets_app/business/main/bottom_bar_navigation/bottom_bar_navigation_cubit.dart';
+import 'package:friendly_custom_bets_app/business/main/main_screen_navigation/bottom_bar_cubit.dart';
+import 'package:friendly_custom_bets_app/business/main/main_screen_navigation/main_routes.dart';
+
+import '../../business/navigation/navigation_service.dart';
 
 class BottomBarWidget extends StatelessWidget {
   const BottomBarWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BottomBarNavigationCubit, BottomBarNavigationState>(
+    return BlocBuilder<BottomBarCubit, List<String>>(
       builder: (context, state) {
         return BottomNavigationBar(
-          currentIndex: getBottomBarItemIndex(state.currentNavBarItem),
+          currentIndex: MainRoutes.getBottomBarIndex(state.last),
           showUnselectedLabels: false,
           items: const [
             BottomNavigationBarItem(
@@ -34,8 +36,8 @@ class BottomBarWidget extends StatelessWidget {
             ),
           ],
           onTap: (index) {
-            BlocProvider.of<BottomBarNavigationCubit>(context)
-                .setNavBarItem(BottomBarItems.values[index]);
+            mainScreenNavKey.currentState
+                ?.pushNamed(MainRoutes.getRouteFromIndex(index));
           },
         );
       },

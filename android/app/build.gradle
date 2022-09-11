@@ -44,7 +44,7 @@ android {
     defaultConfig {
         applicationId "com.sponge.friendlycustombetsapp"
         minSdkVersion 18
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         manifestPlaceholders = [

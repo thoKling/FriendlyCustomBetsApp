@@ -1,33 +1,34 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:friendly_custom_bets_app/business/navigation/routes.dart';
 
-part 'navigation_state.dart';
+abstract class NavigationObserverCubit extends Cubit<List<String>> {
+  NavigationObserverCubit(List<String> initialRoutes) : super(initialRoutes);
 
-class NavigationCubit extends Cubit<NavigationState> {
-  final GlobalKey<NavigatorState> _navigatorKey;
-
-  NavigationCubit(this._navigatorKey) : super(NavigationState.initial());
-
-  void addRoute(String destination, {Object? args}) {
-    if (state.currentRoute != destination) {
-      _navigatorKey.currentState?.pushNamed(
-        destination,
-        arguments: args,
+  /// If item is already in list we go back to it, otherwise we add it on top of the list
+  void addRouteOrPopUntil(String route, {Object? args}) {
+    if (state.last == route) {
+      return;
+    } else if (state.contains(route)) {
+      List<String> newList = state.takeWhile((item) => item != item).toList();
+      newList.add(route);
+      emit(
+        newList,
       );
-
-      emit(state.copyWith(
-        routes: List.from(state.routes)..add(destination),
-      ));
+    } else {
+      emit(
+        List.from(state)..add(route),
+      );
     }
   }
 
-  void popRoute(String destination, {Object? args}) {
-    if (state.routes.length > 1) {
-      _navigatorKey.currentState?.pop();
+  void didPop(String route) {
+    if (state.isNotEmpty) {
+      emit(List.from(state)..removeLast());
     }
+  }
 
-    emit(state.copyWith(routes: List.from(state.routes)..removeLast()));
+  void didPush(String route) {
+    emit(
+      List.from(state)..add(route),
+    );
   }
 }

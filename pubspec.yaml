@@ -46,7 +46,7 @@ dependencies:
   flutter_appauth: ^4.0.1
 
   # For saving securely data on device
-  flutter_secure_storage: ^5.0.2
+  flutter_secure_storage: ^6.0.0
 
   # For rest requests
   retrofit: ^3.0.1+1
@@ -57,6 +57,10 @@ dependencies:
 
   # For making toast without BuildContext
   fluttertoast: ^8.0.9
+
+  # Hooks are a new kind of object that manage the life-cycle of a Widget.
+  # They exist for one reason: increase the code-sharing between widgets by removing duplicates.
+  flutter_hooks: ^0.18.5+1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

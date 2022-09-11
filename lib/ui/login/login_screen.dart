@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:friendly_custom_bets_app/business/authentication/authentication_cubit.dart';
-import 'package:friendly_custom_bets_app/business/navigation/navigation_cubit.dart';
-import 'package:friendly_custom_bets_app/business/navigation/routes.dart';
+import 'package:friendly_custom_bets_app/business/navigation/navigation_service.dart';
+import 'package:friendly_custom_bets_app/business/overall/overall_routes.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,7 +15,8 @@ class LoginScreen extends StatelessWidget {
         body: BlocConsumer<AuthenticationCubit, AuthenticationState>(
           listener: (BuildContext context, AuthenticationState state) {
             if (state.loginState == LoginState.loggedIn) {
-              context.read<NavigationCubit>().addRoute(Routes.tournamentsList);
+              overallNavKey.currentState
+                  ?.pushNamed(OverallRoutes.tournamentsList);
             }
           },
           builder: (BuildContext context, AuthenticationState state) {

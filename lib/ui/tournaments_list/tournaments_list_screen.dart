@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friendly_custom_bets_app/business/navigation/navigation_service.dart';
+import 'package:friendly_custom_bets_app/business/overall/overall_routes.dart';
 import 'package:friendly_custom_bets_app/business/tournaments/tournaments_cubit.dart';
+
+import '../../rest/dto/tournament.dart';
 
 class TournamentsListScreen extends StatelessWidget {
   const TournamentsListScreen({Key? key}) : super(key: key);
@@ -22,18 +26,40 @@ class TournamentsListScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
 
-            return ListView.builder(
-              itemCount: state.myTournaments.length + 1,
-              itemBuilder: (BuildContext context, int index) {
-                return index < state.myTournaments.length
-                    ? ListTile(title: Text(state.myTournaments[index].name))
-                    : ListTile(
-                        title: TextButton(
-                          onPressed: () => _createTournament(context),
-                          child: const Text("Créer un tournoi"), //TODO: lang
-                        ),
-                      );
-              },
+            return RefreshIndicator(
+              onRefresh: () => tournamentCubit.fetchMyTournaments(),
+              child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: state.myTournaments.length + 1,
+                itemBuilder: (BuildContext context, int index) {
+                  return index < state.myTournaments.length
+                      ? ListTile(
+                          title: TextButton(
+                            onPressed: () => _selectTournament(
+                              context,
+                              state.myTournaments[index],
+                            ),
+                            child: Text(state.myTournaments[index].name),
+                          ),
+                        )
+                      : ListTile(
+                          //TODO : move
+                          leading: TextButton(
+                            style: TextButton.styleFrom(primary: Colors.blue),
+                            onPressed: () => _joinTournament(
+                              context,
+                              tournamentCubit,
+                            ),
+                            child: const Text("Rejoindre"), //TODO: lang
+                          ),
+                          trailing: TextButton(
+                            style: TextButton.styleFrom(primary: Colors.green),
+                            onPressed: () => _createTournament(context),
+                            child: const Text("Créer"), //TODO: lang
+                          ),
+                        );
+                },
+              ),
             );
           },
         ),
@@ -41,7 +67,47 @@ class TournamentsListScreen extends StatelessWidget {
     );
   }
 
+  void _selectTournament(BuildContext context, Tournament tournament) {
+    context.read<TournamentsCubit>().selectTournament(tournament);
+    overallNavKey.currentState?.pushNamed(OverallRoutes.main);
+  }
+
   void _createTournament(BuildContext context) {
     context.read<TournamentsCubit>().createTournament("Test");
+  }
+
+  void _joinTournament(
+    BuildContext context,
+    TournamentsCubit tournamentsCubit,
+  ) async {
+    String? tournamentId = await showDialog(
+      context: context,
+      builder: (context) {
+        TextEditingController controller = TextEditingController();
+
+        return AlertDialog(
+          title: const Text(
+            "Rentrez l'id du tournoi",
+          ),
+          content: TextField(
+            controller: controller,
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, null),
+              child: const Text("Annuler"),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, controller.text),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (tournamentId != null) {
+      tournamentsCubit.joinTournament(int.parse(tournamentId));
+    }
   }
 }

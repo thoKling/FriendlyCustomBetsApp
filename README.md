@@ -1,18 +1,10 @@
-# friendly_custom_bets_app
+# Friendly custom bets app
 
 [![codecov](https://codecov.io/gh/thoKling/FriendlyCustomBetsApp/branch/main/graph/badge.svg)](https://codecov.io/gh/thoKling/FriendlyCustomBetsApp)
 
-Paris
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## :rocket: Setup
+1. Follow [the flutter installation guide](https://docs.flutter.dev/get-started/install).
+2. Run flutter doctor
+3. Run flutter pub get (in the project directory)
+4. Run flutter pub run build_runner build --delete-conflicting-outputs
+5. Run the project

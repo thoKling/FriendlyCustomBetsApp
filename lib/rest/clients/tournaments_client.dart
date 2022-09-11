@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../dto/game.dart';
 import '../dto/tournament.dart';
 import '../interceptors/authentication_interceptor.dart';
 
@@ -22,6 +23,18 @@ abstract class TournamentsClient {
   @GET("myTournaments")
   Future<List<Tournament>> getMyTournaments();
 
+  @GET("tournament/{id}")
+  Future<Tournament> getTournament(@Path("id") int tournamentId);
+
   @POST("create")
   Future<Tournament> createTournament(@Body() String tournamentName);
+
+  @POST("join")
+  Future<Tournament> joinTournament(@Body() int tournamentId);
+
+  @POST("addGame")
+  Future<Game> addGame(
+    @Body() int tournamentId,
+    @Body() String gameName,
+  );
 }
