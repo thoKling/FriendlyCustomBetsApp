@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:friendly_custom_bets_app/rest/dto/game_creation_dto.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../dto/game.dart';
@@ -34,7 +35,6 @@ abstract class TournamentsClient {
 
   @POST("addGame")
   Future<Game> addGame(
-    @Body() int tournamentId,
-    @Body() String gameName,
+    @Body() GameCreationDto gameCreationDto,
   );
 }
