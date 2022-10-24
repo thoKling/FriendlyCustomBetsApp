@@ -41,17 +41,17 @@ class TournamentsCubit extends Cubit<TournamentsState> {
   }
 
   Future<void> createTournament(String name) async {
-    TournamentControllerApi api = CustomBetApi().getTournamentControllerApi();
     try {
-      MyTournament? myTournament =
-          (await api.createTournament(body: name)).data;
+      MyTournament? newTournament =
+          (await _apiClient.createTournament(body: name)).data;
 
-      if (myTournament == null) {
+      if (newTournament == null) {
         throw Exception("La réponse est nulle");
       }
 
       emit(state.copyWith(
-        myTournaments: List.from(state.myTournaments)..add(myTournament),
+        currentTournament: newTournament,
+        myTournaments: List.from(state.myTournaments)..add(newTournament),
       ));
     } on Exception catch (e) {
       debugPrint(e.toString());

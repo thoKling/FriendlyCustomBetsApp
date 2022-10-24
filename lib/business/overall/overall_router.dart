@@ -4,6 +4,7 @@ import 'package:friendly_custom_bets_app/ui/login/login_screen.dart';
 import 'package:friendly_custom_bets_app/ui/tournaments_list/tournaments_list_screen.dart';
 
 import '../../ui/main/main_screen.dart';
+import '../../ui/tournaments_list/tournament_creation_screen.dart';
 
 class OverallRouter {
   static MaterialPageRoute route(RouteSettings settings) {
@@ -23,6 +24,12 @@ class OverallRouter {
       case OverallRoutes.tournamentsList:
         return OverallRoute(
           const TournamentsListScreen(),
+          settings: settings,
+        );
+
+      case OverallRoutes.tournamentCreation:
+        return OverallRoute(
+          TournamentCreationScreen(),
           settings: settings,
         );
 

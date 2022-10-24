@@ -45,7 +45,8 @@ class TournamentsListScreen extends StatelessWidget {
                           //TODO : move
                           leading: TextButton(
                             style: TextButton.styleFrom(
-                                foregroundColor: Colors.blue),
+                              foregroundColor: Colors.blue,
+                            ),
                             onPressed: () => _joinTournament(
                               context,
                               tournamentCubit,
@@ -54,7 +55,8 @@ class TournamentsListScreen extends StatelessWidget {
                           ),
                           trailing: TextButton(
                             style: TextButton.styleFrom(
-                                foregroundColor: Colors.green),
+                              foregroundColor: Colors.green,
+                            ),
                             onPressed: () => _createTournament(context),
                             child: const Text("Créer"), //TODO: lang
                           ),
@@ -74,7 +76,7 @@ class TournamentsListScreen extends StatelessWidget {
   }
 
   void _createTournament(BuildContext context) {
-    context.read<TournamentsCubit>().createTournament("Test");
+    overallNavKey.currentState?.pushNamed(OverallRoutes.tournamentCreation);
   }
 
   void _joinTournament(
