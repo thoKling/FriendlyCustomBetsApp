@@ -11,6 +11,10 @@
 
 ## Api update
 
+```bash
+wget http://localhost:7000/v3/api-docs -o openapi-gen/swaggers/api.json
+```
+
 ```bash 
 java -jar openapi-gen/openapi-generator-cli.jar generate -i openapi-gen/swaggers/api.yaml -g dart-dio -c openapi-gen/config.yaml -o openapi-gen/api --enable-post-process-file
 ```

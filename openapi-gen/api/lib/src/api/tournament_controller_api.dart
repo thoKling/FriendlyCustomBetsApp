@@ -9,7 +9,6 @@ import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:custom_bet_api/src/model/add_game_to_tournament_request.dart';
-import 'package:custom_bet_api/src/model/game.dart';
 import 'package:custom_bet_api/src/model/my_tournament.dart';
 
 class TournamentControllerApi {
@@ -32,9 +31,9 @@ class TournamentControllerApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [Game] as data
+  /// Returns a [Future] containing a [Response] with a [MyTournament] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Game>> addGameToTournament({ 
+  Future<Response<MyTournament>> addGameToTournament({ 
     required AddGameToTournamentRequest addGameToTournamentRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -88,14 +87,14 @@ class TournamentControllerApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    Game _responseData;
+    MyTournament _responseData;
 
     try {
-      const _responseType = FullType(Game);
+      const _responseType = FullType(MyTournament);
       _responseData = _serializers.deserialize(
         _response.data!,
         specifiedType: _responseType,
-      ) as Game;
+      ) as MyTournament;
 
     } catch (error, stackTrace) {
       throw DioError(
@@ -106,7 +105,7 @@ class TournamentControllerApi {
       )..stackTrace = stackTrace;
     }
 
-    return Response<Game>(
+    return Response<MyTournament>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

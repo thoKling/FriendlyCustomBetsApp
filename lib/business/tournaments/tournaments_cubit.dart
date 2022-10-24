@@ -85,16 +85,13 @@ class TournamentsCubit extends Cubit<TournamentsState> {
     AddGameToTournamentRequest request = AddGameToTournamentRequest(
       ((b) => b
         ..tournamentId = state.currentTournament!.id
-        ..gameName = name),
+        ..game = (GameBuilder()..name = name)),
     );
-    Game? game = (await CustomBetApi()
-            .getTournamentControllerApi()
-            .addGameToTournament(addGameToTournamentRequest: request))
+    MyTournament? tournament = (await _apiClient.addGameToTournament(
+      addGameToTournamentRequest: request,
+    ))
         .data;
-    /*Tournament updatedCurrentTournament = state.currentTournament!;
-    updatedCurrentTournament.games =
-        updatedCurrentTournament.games.rebuild((b) => b.add(game));
 
-    emit(state.copyWith(currentTournament: updatedCurrentTournament));*/
+    emit(state.copyWith(currentTournament: tournament));
   }
 }

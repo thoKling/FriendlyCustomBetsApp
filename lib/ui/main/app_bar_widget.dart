@@ -11,7 +11,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
       builder: (context, state) => AppBar(
         automaticallyImplyLeading: false,
         title: Text(state.currentTournament!.name),
-        centerTitle: true,
+        actions: [Text(state.currentTournament?.myTokens.toString() ?? "")],
       ),
     );
   }

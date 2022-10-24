@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **addGameToTournament**
-> Game addGameToTournament(addGameToTournamentRequest)
+> MyTournament addGameToTournament(addGameToTournamentRequest)
 
 Add a new game to a Tournament
 
@@ -46,7 +46,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Game**](Game.md)
+[**MyTournament**](MyTournament.md)
 
 ### Authorization
 
