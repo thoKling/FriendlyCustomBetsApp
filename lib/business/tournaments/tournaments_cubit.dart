@@ -1,16 +1,17 @@
 import 'package:bloc/bloc.dart';
+import 'package:custom_bet_api/custom_bet_api.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import '../../rest/clients/tournaments_client.dart';
-import '../../rest/dto/game.dart';
-import '../../rest/dto/tournament.dart';
+import 'package:friendly_custom_bets_app/api/client_api.dart';
 
 part 'tournaments_state.dart';
 
 class TournamentsCubit extends Cubit<TournamentsState> {
   TournamentsCubit() : super(TournamentsState.initial());
+
+  TournamentControllerApi get _apiClient =>
+      ClientApi.instance.getTournamentControllerApi();
 
   Future<void> fetchMyTournaments() async {
     try {
@@ -18,8 +19,8 @@ class TournamentsCubit extends Cubit<TournamentsState> {
         tournamentsLoadingState: TournamentsLoadingState.loading,
       ));
 
-      List<Tournament> myTournaments =
-          await TournamentsClient().getMyTournaments();
+      List<MyTournament> myTournaments =
+          (await _apiClient.getMyTournaments()).data?.toList() ?? [];
 
       debugPrint("Tournaments fetched : ${myTournaments.toString()}");
 
@@ -40,11 +41,17 @@ class TournamentsCubit extends Cubit<TournamentsState> {
   }
 
   Future<void> createTournament(String name) async {
+    TournamentControllerApi api = CustomBetApi().getTournamentControllerApi();
     try {
-      Tournament tournament = await TournamentsClient().createTournament(name);
+      MyTournament? myTournament =
+          (await api.createTournament(body: name)).data;
+
+      if (myTournament == null) {
+        throw Exception("La réponse est nulle");
+      }
 
       emit(state.copyWith(
-        myTournaments: List.from(state.myTournaments)..add(tournament),
+        myTournaments: List.from(state.myTournaments)..add(myTournament),
       ));
     } on Exception catch (e) {
       debugPrint(e.toString());
@@ -58,29 +65,36 @@ class TournamentsCubit extends Cubit<TournamentsState> {
     }
   }
 
-  Future<void> selectTournament(Tournament tournament) async {
+  Future<void> selectTournament(MyTournament tournament) async {
     emit(state.copyWith(currentTournament: tournament));
   }
 
   Future<void> joinTournament(int tournamentId) async {
-    await TournamentsClient().joinTournament(tournamentId);
+    await _apiClient.joinTournament(body: tournamentId);
   }
 
   Future<void> updateCurrentTournament() async {
     assert(state.currentTournament?.id != null);
 
-    Tournament t =
-        await TournamentsClient().getTournament(state.currentTournament!.id);
+    await _apiClient.getTournament(tournamentId: state.currentTournament!.id!);
   }
 
   Future<void> addGame(String name) async {
     assert(state.currentTournament?.id != null);
 
-    Game game =
-        await TournamentsClient().addGame(state.currentTournament!.id, name);
-    Tournament updatedCurrentTournament = state.currentTournament!;
-    updatedCurrentTournament.games.add(game);
+    AddGameToTournamentRequest request = AddGameToTournamentRequest(
+      ((b) => b
+        ..tournamentId = state.currentTournament!.id
+        ..gameName = name),
+    );
+    Game? game = (await CustomBetApi()
+            .getTournamentControllerApi()
+            .addGameToTournament(addGameToTournamentRequest: request))
+        .data;
+    /*Tournament updatedCurrentTournament = state.currentTournament!;
+    updatedCurrentTournament.games =
+        updatedCurrentTournament.games.rebuild((b) => b.add(game));
 
-    emit(state.copyWith(currentTournament: updatedCurrentTournament));
+    emit(state.copyWith(currentTournament: updatedCurrentTournament));*/
   }
 }

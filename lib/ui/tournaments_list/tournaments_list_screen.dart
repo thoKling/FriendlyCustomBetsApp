@@ -1,10 +1,9 @@
+import 'package:custom_bet_api/custom_bet_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friendly_custom_bets_app/business/navigation/navigation_service.dart';
 import 'package:friendly_custom_bets_app/business/overall/overall_routes.dart';
 import 'package:friendly_custom_bets_app/business/tournaments/tournaments_cubit.dart';
-
-import '../../rest/dto/tournament.dart';
 
 class TournamentsListScreen extends StatelessWidget {
   const TournamentsListScreen({Key? key}) : super(key: key);
@@ -45,7 +44,8 @@ class TournamentsListScreen extends StatelessWidget {
                       : ListTile(
                           //TODO : move
                           leading: TextButton(
-                            style: TextButton.styleFrom(primary: Colors.blue),
+                            style: TextButton.styleFrom(
+                                foregroundColor: Colors.blue),
                             onPressed: () => _joinTournament(
                               context,
                               tournamentCubit,
@@ -53,7 +53,8 @@ class TournamentsListScreen extends StatelessWidget {
                             child: const Text("Rejoindre"), //TODO: lang
                           ),
                           trailing: TextButton(
-                            style: TextButton.styleFrom(primary: Colors.green),
+                            style: TextButton.styleFrom(
+                                foregroundColor: Colors.green),
                             onPressed: () => _createTournament(context),
                             child: const Text("Créer"), //TODO: lang
                           ),
@@ -67,7 +68,7 @@ class TournamentsListScreen extends StatelessWidget {
     );
   }
 
-  void _selectTournament(BuildContext context, Tournament tournament) {
+  void _selectTournament(BuildContext context, MyTournament tournament) {
     context.read<TournamentsCubit>().selectTournament(tournament);
     overallNavKey.currentState?.pushNamed(OverallRoutes.main);
   }

@@ -6,8 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:friendly_custom_bets_app/rest/interceptors/authentication_interceptor.dart';
 
+import '../../api/client_api.dart';
 import 'authentication_constants.dart';
 
 part 'authentication_state.dart';
@@ -27,7 +27,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           auth0ClientId,
           auth0RedirectUri,
           issuer: 'https://$auth0Domain',
-          scopes: ['openid', 'profile', 'offline_access'],
+          scopes: ['openid'],
+          additionalParameters: {
+            'audience': 'https://friendly-custom-bets-api.sponge.com',
+          },
         ),
       );
 
@@ -35,9 +38,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         throw Exception();
       }
 
-      AuthenticationInterceptor.accessToken = result.idToken ?? "";
-
-      //final profile = await AuthenticationClient().getUserDetails(); TODO: fix => on a pas le bon token, j'ai raté un truc sur OAuth
+      //Add token
+      ClientApi.instance.setOAuthToken("Auth0", result.accessToken ?? "");
 
       await _secureStorage.write(
         key: 'refresh_token',

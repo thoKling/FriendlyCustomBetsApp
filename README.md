@@ -8,3 +8,13 @@
 3. Run flutter pub get (in the project directory)
 4. Run flutter pub run build_runner build --delete-conflicting-outputs
 5. Run the project
+
+## Api update
+
+```bash 
+java -jar openapi-gen/openapi-generator-cli.jar generate -i openapi-gen/swaggers/api.yaml -g dart-dio -c openapi-gen/config.yaml -o openapi-gen/api --enable-post-process-file
+```
+
+```bash
+cd openapi-gen/api; flutter pub run build_runner build --delete-conflicting-outputs 
+```

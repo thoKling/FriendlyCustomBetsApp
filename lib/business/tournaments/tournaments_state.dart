@@ -9,8 +9,8 @@ enum TournamentsLoadingState {
 class TournamentsState extends Equatable {
   final TournamentsLoadingState tournamentsLoadingState;
 
-  final List<Tournament> myTournaments;
-  final Tournament? currentTournament;
+  final List<MyTournament> myTournaments;
+  final MyTournament? currentTournament;
 
   const TournamentsState(
     this.tournamentsLoadingState,
@@ -26,8 +26,8 @@ class TournamentsState extends Equatable {
 
   copyWith({
     TournamentsLoadingState? tournamentsLoadingState,
-    List<Tournament>? myTournaments,
-    Tournament? currentTournament,
+    List<MyTournament>? myTournaments,
+    MyTournament? currentTournament,
   }) {
     return TournamentsState(
       tournamentsLoadingState ?? this.tournamentsLoadingState,

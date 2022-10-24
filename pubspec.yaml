@@ -30,6 +30,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Api generated using openapi-generator
+  custom_bet_api:
+    path: ./openapi-gen/api/
+
   # For translations
   flutter_localizations:
     sdk: flutter
@@ -47,10 +51,6 @@ dependencies:
 
   # For saving securely data on device
   flutter_secure_storage: ^6.0.0
-
-  # For rest requests
-  retrofit: ^3.0.1+1
-  dio: ^4.0.6
 
   # Annotations used by json_serializable to create code for JSON serialization
   json_annotation: ^4.6.0
@@ -80,9 +80,6 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.1
   dart_code_metrics: ^4.12.0
-
-  # To generate retrofit classes
-  retrofit_generator: ^4.0.1
 
   # To generate modelsflutter pub upgrade --major-versions
   build_runner: ^2.1.11
