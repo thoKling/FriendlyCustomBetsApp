@@ -46,14 +46,16 @@ Please follow the [installation procedure](#installation--usage) and then run th
 import 'package:custom_bet_api/custom_bet_api.dart';
 
 
-final api = CustomBetApi().getTournamentControllerApi();
-final AddGameToTournamentRequest addGameToTournamentRequest = ; // AddGameToTournamentRequest | 
+final api = CustomBetApi().getBetControllerApi();
+final int tournamentId = 789; // int | 
+final int gameId = 789; // int | 
+final Bet bet = ; // Bet | 
 
 try {
-    final response = await api.addGameToTournament(addGameToTournamentRequest);
+    final response = await api.addBetToGame(tournamentId, gameId, bet);
     print(response);
 } catch on DioError (e) {
-    print("Exception when calling TournamentControllerApi->addGameToTournament: $e\n");
+    print("Exception when calling BetControllerApi->addBetToGame: $e\n");
 }
 
 ```
@@ -64,7 +66,8 @@ All URIs are relative to *http://localhost:7000*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-[*TournamentControllerApi*](doc\TournamentControllerApi.md) | [**addGameToTournament**](doc\TournamentControllerApi.md#addgametotournament) | **POST** /tournament/addGame | Add a new game to a Tournament
+[*BetControllerApi*](doc\BetControllerApi.md) | [**addBetToGame**](doc\BetControllerApi.md#addbettogame) | **POST** /tournament/{tournamentId}/game/{gameId}/bet/addBet | Add a new bet to a Game
+[*GameControllerApi*](doc\GameControllerApi.md) | [**addGameToTournament**](doc\GameControllerApi.md#addgametotournament) | **POST** /tournament/{tournamentId}/game/addGame | Add a new game to a Tournament
 [*TournamentControllerApi*](doc\TournamentControllerApi.md) | [**createTournament**](doc\TournamentControllerApi.md#createtournament) | **POST** /tournament/create | Create a tournament
 [*TournamentControllerApi*](doc\TournamentControllerApi.md) | [**getMyTournaments**](doc\TournamentControllerApi.md#getmytournaments) | **GET** /tournament/myTournaments | Fetch all tournaments where user participate
 [*TournamentControllerApi*](doc\TournamentControllerApi.md) | [**getTournament**](doc\TournamentControllerApi.md#gettournament) | **GET** /tournament/{tournamentId} | Fetch a tournament by its id
@@ -73,7 +76,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [AddGameToTournamentRequest](doc\AddGameToTournamentRequest.md)
  - [Bet](doc\Bet.md)
  - [Game](doc\Game.md)
  - [MyTournament](doc\MyTournament.md)

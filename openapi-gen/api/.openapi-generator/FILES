@@ -1,15 +1,18 @@
 .gitignore
 README.md
 analysis_options.yaml
-doc/AddGameToTournamentRequest.md
 doc/Bet.md
+doc/BetControllerApi.md
 doc/Game.md
+doc/GameControllerApi.md
 doc/MyTournament.md
 doc/Tournament.md
 doc/TournamentControllerApi.md
 doc/User.md
 lib/custom_bet_api.dart
 lib/src/api.dart
+lib/src/api/bet_controller_api.dart
+lib/src/api/game_controller_api.dart
 lib/src/api/tournament_controller_api.dart
 lib/src/api_util.dart
 lib/src/auth/api_key_auth.dart
@@ -18,7 +21,6 @@ lib/src/auth/basic_auth.dart
 lib/src/auth/bearer_auth.dart
 lib/src/auth/oauth.dart
 lib/src/date_serializer.dart
-lib/src/model/add_game_to_tournament_request.dart
 lib/src/model/bet.dart
 lib/src/model/date.dart
 lib/src/model/game.dart

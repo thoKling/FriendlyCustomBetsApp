@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:friendly_custom_bets_app/business/main/games_screen_navigation/games_screen_routes.dart';
+import 'package:friendly_custom_bets_app/ui/main/games/bet_add_screen.dart';
 
-import '../../../ui/main/games/games_add_screen.dart';
+import '../../../ui/main/games/game_add_screen.dart';
 import '../../../ui/main/games/games_list_widget.dart';
 
 class GamesScreenRouter {
   static MaterialPageRoute route(RouteSettings settings) {
     switch (settings.name) {
-      case GamesRoutes.add:
+      case GamesRoutes.addGame:
         return GamesRoute(
-          const GamesAddScreen(),
+          const GameAddScreen(),
+          settings: settings,
+        );
+
+      case GamesRoutes.addBet:
+        return GamesRoute(
+          const BetAddScreen(),
           settings: settings,
         );
 

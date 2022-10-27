@@ -9,55 +9,11 @@ All URIs are relative to *http://localhost:7000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addGameToTournament**](TournamentControllerApi.md#addgametotournament) | **POST** /tournament/addGame | Add a new game to a Tournament
 [**createTournament**](TournamentControllerApi.md#createtournament) | **POST** /tournament/create | Create a tournament
 [**getMyTournaments**](TournamentControllerApi.md#getmytournaments) | **GET** /tournament/myTournaments | Fetch all tournaments where user participate
 [**getTournament**](TournamentControllerApi.md#gettournament) | **GET** /tournament/{tournamentId} | Fetch a tournament by its id
 [**joinTournament**](TournamentControllerApi.md#jointournament) | **POST** /tournament/join | Join a tournament by its id
 
-
-# **addGameToTournament**
-> MyTournament addGameToTournament(addGameToTournamentRequest)
-
-Add a new game to a Tournament
-
-### Example
-```dart
-import 'package:custom_bet_api/api.dart';
-// TODO Configure OAuth2 access token for authorization: Auth0
-//defaultApiClient.getAuthentication<OAuth>('Auth0').accessToken = 'YOUR_ACCESS_TOKEN';
-
-final api = CustomBetApi().getTournamentControllerApi();
-final AddGameToTournamentRequest addGameToTournamentRequest = ; // AddGameToTournamentRequest | 
-
-try {
-    final response = api.addGameToTournament(addGameToTournamentRequest);
-    print(response);
-} catch on DioError (e) {
-    print('Exception when calling TournamentControllerApi->addGameToTournament: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **addGameToTournamentRequest** | [**AddGameToTournamentRequest**](AddGameToTournamentRequest.md)|  | 
-
-### Return type
-
-[**MyTournament**](MyTournament.md)
-
-### Authorization
-
-[Auth0](../README.md#Auth0)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createTournament**
 > MyTournament createTournament(body)

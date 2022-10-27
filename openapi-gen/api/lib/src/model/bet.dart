@@ -12,14 +12,18 @@ part 'bet.g.dart';
 ///
 /// Properties:
 /// * [id] 
-/// * [amount] 
+/// * [name] 
+/// * [odd] 
 @BuiltValue()
 abstract class Bet implements Built<Bet, BetBuilder> {
   @BuiltValueField(wireName: r'id')
   int? get id;
 
-  @BuiltValueField(wireName: r'amount')
-  int get amount;
+  @BuiltValueField(wireName: r'name')
+  String get name;
+
+  @BuiltValueField(wireName: r'odd')
+  double get odd;
 
   Bet._();
 
@@ -51,10 +55,15 @@ class _$BetSerializer implements PrimitiveSerializer<Bet> {
         specifiedType: const FullType(int),
       );
     }
-    yield r'amount';
+    yield r'name';
     yield serializers.serialize(
-      object.amount,
-      specifiedType: const FullType(int),
+      object.name,
+      specifiedType: const FullType(String),
+    );
+    yield r'odd';
+    yield serializers.serialize(
+      object.odd,
+      specifiedType: const FullType(double),
     );
   }
 
@@ -86,12 +95,19 @@ class _$BetSerializer implements PrimitiveSerializer<Bet> {
           ) as int;
           result.id = valueDes;
           break;
-        case r'amount':
+        case r'name':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.amount = valueDes;
+            specifiedType: const FullType(String),
+          ) as String;
+          result.name = valueDes;
+          break;
+        case r'odd':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(double),
+          ) as double;
+          result.odd = valueDes;
           break;
         default:
           unhandled.add(key);

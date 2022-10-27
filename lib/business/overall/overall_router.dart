@@ -29,7 +29,7 @@ class OverallRouter {
 
       case OverallRoutes.tournamentCreation:
         return OverallRoute(
-          TournamentCreationScreen(),
+          const TournamentCreationScreen(),
           settings: settings,
         );
 

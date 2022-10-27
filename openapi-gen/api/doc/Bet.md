@@ -9,7 +9,8 @@ import 'package:custom_bet_api/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | [optional] 
-**amount** | **int** |  | 
+**name** | **String** |  | 
+**odd** | **double** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

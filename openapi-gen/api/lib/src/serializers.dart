@@ -14,7 +14,6 @@ import 'package:built_value/iso_8601_date_time_serializer.dart';
 import 'package:custom_bet_api/src/date_serializer.dart';
 import 'package:custom_bet_api/src/model/date.dart';
 
-import 'package:custom_bet_api/src/model/add_game_to_tournament_request.dart';
 import 'package:custom_bet_api/src/model/bet.dart';
 import 'package:custom_bet_api/src/model/game.dart';
 import 'package:custom_bet_api/src/model/my_tournament.dart';
@@ -24,7 +23,6 @@ import 'package:custom_bet_api/src/model/user.dart';
 part 'serializers.g.dart';
 
 @SerializersFor([
-  AddGameToTournamentRequest,
   Bet,
   Game,
   MyTournament,

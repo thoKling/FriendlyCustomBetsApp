@@ -5,8 +5,8 @@ import 'package:friendly_custom_bets_app/business/tournaments/tournaments_cubit.
 
 import '../../misc_widgets/form/text_form_field_with_label_widget.dart';
 
-class GamesAddScreen extends HookWidget {
-  const GamesAddScreen({Key? key}) : super(key: key);
+class GameAddScreen extends HookWidget {
+  const GameAddScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
