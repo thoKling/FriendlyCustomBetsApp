@@ -67,6 +67,7 @@ All URIs are relative to *http://localhost:7000*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 [*BetControllerApi*](doc\BetControllerApi.md) | [**addBetToGame**](doc\BetControllerApi.md#addbettogame) | **POST** /tournament/{tournamentId}/game/{gameId}/bet/addBet | Add a new bet to a Game
+[*BetTakenControllerApi*](doc\BetTakenControllerApi.md) | [**takeBet**](doc\BetTakenControllerApi.md#takebet) | **POST** /tournament/{tournamentId}/takenBet/takeBet/{betId}/{gameId} | Take a bet on an existing bet
 [*GameControllerApi*](doc\GameControllerApi.md) | [**addGameToTournament**](doc\GameControllerApi.md#addgametotournament) | **POST** /tournament/{tournamentId}/game/addGame | Add a new game to a Tournament
 [*TournamentControllerApi*](doc\TournamentControllerApi.md) | [**createTournament**](doc\TournamentControllerApi.md#createtournament) | **POST** /tournament/create | Create a tournament
 [*TournamentControllerApi*](doc\TournamentControllerApi.md) | [**getMyTournaments**](doc\TournamentControllerApi.md#getmytournaments) | **GET** /tournament/myTournaments | Fetch all tournaments where user participate
@@ -77,8 +78,10 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Bet](doc\Bet.md)
+ - [BetTaken](doc\BetTaken.md)
  - [Game](doc\Game.md)
  - [MyTournament](doc\MyTournament.md)
+ - [TakeBetRequest](doc\TakeBetRequest.md)
  - [Tournament](doc\Tournament.md)
  - [User](doc\User.md)
 

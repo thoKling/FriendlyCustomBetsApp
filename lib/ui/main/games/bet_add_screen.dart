@@ -4,8 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:friendly_custom_bets_app/business/navigation/navigation_service.dart';
 
 import '../../../business/main/games_screen_navigation/games_screen_routes.dart';
-import '../../../business/tournaments/tournaments_cubit.dart';
-import '../../misc_widgets/form/text_form_field_with_label_widget.dart';
+import '../../../business/selected_tournament/selected_tournament_cubit.dart';
 
 /// Args to pass via route
 class BetAddScreenArgs {
@@ -27,16 +26,22 @@ class BetAddScreen extends HookWidget {
         const Text("Ajouter un pari"), //TODO: lang
         SizedBox(
           height: 50,
-          child: TextFormFieldWithLabelWidget(
-            label: "Nom du pari :",
+          child: TextField(
             controller: nameTextController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Nom du pari',
+            ),
           ),
         ), //TODO: lang
         SizedBox(
           height: 50,
-          child: TextFormFieldWithLabelWidget(
-            label: "Cote :",
+          child: TextField(
             controller: oddTextController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Cote',
+            ),
           ),
         ), //TODO: lang
         TextButton(
@@ -55,7 +60,7 @@ class BetAddScreen extends HookWidget {
     BetAddScreenArgs args =
         ModalRoute.of(context)!.settings.arguments as BetAddScreenArgs;
 
-    await context.read<TournamentsCubit>().addBet(
+    await context.read<SelectedTournamentCubit>().addBet(
           betName,
           double.parse(betOdd),
           args.gameId,

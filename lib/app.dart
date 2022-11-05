@@ -51,8 +51,7 @@ class _FriendlyCustomBetsAppState extends State<FriendlyCustomBetsApp> {
               );
             },
           ),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
         ],
 
         /// Routes

@@ -69,54 +69,9 @@ class TournamentsCubit extends Cubit<TournamentsState> {
     }
   }
 
-  Future<void> selectTournament(MyTournament tournament) async {
-    emit(state.copyWith(currentTournament: tournament));
-  }
-
   Future<void> joinTournament(int tournamentId) async {
     await _apiClient
         .getTournamentControllerApi()
         .joinTournament(body: tournamentId);
-  }
-
-  Future<void> updateCurrentTournament() async {
-    assert(state.currentTournament?.id != null);
-
-    await _apiClient
-        .getTournamentControllerApi()
-        .getTournament(tournamentId: state.currentTournament!.id!);
-  }
-
-  Future<void> addGame(String name) async {
-    assert(state.currentTournament?.id != null);
-
-    Game game = (GameBuilder()..name = name).build();
-    MyTournament? tournament =
-        (await _apiClient.getGameControllerApi().addGameToTournament(
-                  tournamentId: state.currentTournament!.id!,
-                  game: game,
-                ))
-            .data;
-
-    emit(state.copyWith(currentTournament: tournament));
-  }
-
-  Future<void> addBet(String betName, double odd, int gameId) async {
-    assert(state.currentTournament?.id != null);
-
-    Bet bet = (BetBuilder()
-          ..name = betName
-          ..odd = odd)
-        .build();
-
-    MyTournament? tournament = (await _apiClient
-            .getBetControllerApi()
-            .addBetToGame(
-                tournamentId: state.currentTournament!.id!,
-                gameId: gameId,
-                bet: bet))
-        .data;
-
-    emit(state.copyWith(currentTournament: tournament));
   }
 }

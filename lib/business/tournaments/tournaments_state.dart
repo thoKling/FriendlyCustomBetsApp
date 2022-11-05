@@ -10,18 +10,15 @@ class TournamentsState extends Equatable {
   final TournamentsLoadingState tournamentsLoadingState;
 
   final List<MyTournament> myTournaments;
-  final MyTournament? currentTournament;
 
   const TournamentsState(
     this.tournamentsLoadingState,
     this.myTournaments,
-    this.currentTournament,
   );
 
   factory TournamentsState.initial() => TournamentsState(
         TournamentsLoadingState.notLoaded,
         List.unmodifiable([]),
-        null,
       );
 
   copyWith({
@@ -34,7 +31,6 @@ class TournamentsState extends Equatable {
       myTournaments == null
           ? this.myTournaments
           : List.unmodifiable(myTournaments),
-      currentTournament ?? this.currentTournament,
     );
   }
 
@@ -42,6 +38,5 @@ class TournamentsState extends Equatable {
   List<Object> get props => [
         tournamentsLoadingState,
         myTournaments,
-        currentTournament ?? "",
       ];
 }

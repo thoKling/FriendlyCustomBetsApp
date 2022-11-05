@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friendly_custom_bets_app/business/tournaments/tournaments_cubit.dart';
+import 'package:friendly_custom_bets_app/business/selected_tournament/selected_tournament_cubit.dart';
 import 'package:friendly_custom_bets_app/ui/main/games/game_list_tile_widget.dart';
 
 import '../../../business/main/games_screen_navigation/games_screen_routes.dart';
@@ -11,18 +11,20 @@ class GamesListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TournamentsCubit tournamentsCubit = context.read<TournamentsCubit>();
+    SelectedTournamentCubit selectedTournamentCubit =
+        context.read<SelectedTournamentCubit>();
 
-    return BlocBuilder<TournamentsCubit, TournamentsState>(
+    return BlocBuilder<SelectedTournamentCubit, SelectedTournamentsState>(
       builder: (context, state) => Column(
         children: [
           Expanded(
             child: RefreshIndicator(
-              onRefresh: () => tournamentsCubit.updateCurrentTournament(),
+              onRefresh: () =>
+                  selectedTournamentCubit.updateSelectedTournament(),
               child: ListView.builder(
-                itemCount: state.currentTournament!.games.length,
+                itemCount: state.selectedTournament.games.length,
                 itemBuilder: (context, index) => GameListTileWidget(
-                  game: state.currentTournament!.games[index],
+                  game: state.selectedTournament.games[index],
                 ),
               ),
             ),

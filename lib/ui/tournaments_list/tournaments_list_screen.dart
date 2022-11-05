@@ -5,6 +5,8 @@ import 'package:friendly_custom_bets_app/business/navigation/navigation_service.
 import 'package:friendly_custom_bets_app/business/overall/overall_routes.dart';
 import 'package:friendly_custom_bets_app/business/tournaments/tournaments_cubit.dart';
 
+import '../main/main_screen.dart';
+
 class TournamentsListScreen extends StatelessWidget {
   const TournamentsListScreen({Key? key}) : super(key: key);
 
@@ -71,14 +73,15 @@ class TournamentsListScreen extends StatelessWidget {
   }
 
   void _selectTournament(BuildContext context, MyTournament tournament) {
-    context.read<TournamentsCubit>().selectTournament(tournament);
-    overallNavKey.currentState?.pushNamed(OverallRoutes.main);
+    overallNavKey.currentState
+        ?.pushNamed(OverallRoutes.main, arguments: MainScreenArgs(tournament));
   }
 
   void _createTournament(BuildContext context) {
     overallNavKey.currentState?.pushNamed(OverallRoutes.tournamentCreation);
   }
 
+  /// TODO: move dans un fichier à part
   void _joinTournament(
     BuildContext context,
     TournamentsCubit tournamentsCubit,
