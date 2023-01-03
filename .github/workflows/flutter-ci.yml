@@ -25,7 +25,10 @@ jobs:
       - run: flutter pub get
 
       # Build generated classes
-      # - run: flutter pub run build_runner build
+      - run: flutter pub run build_runner build
+
+      # Build api generated classes in folder openapi-gen
+      - run: (cd ./openapi-gen/api; flutter pub run build_runner build --delete-conflicting-outputs)
 
       # Analyze project
       - run: flutter analyze
