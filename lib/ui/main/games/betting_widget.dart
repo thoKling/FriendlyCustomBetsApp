@@ -15,6 +15,10 @@ class BettingWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController amountController = useTextEditingController();
+    ValueNotifier<bool> isBettingDisabled = useState(true);
+    amountController.addListener(() {
+      if (amountController.text.isNotEmpty) isBettingDisabled.value = false;
+    });
 
     return Row(children: [
       Expanded(
@@ -24,7 +28,9 @@ class BettingWidget extends HookWidget {
         ),
       ),
       TextButton(
-        onPressed: () => _bet(context, amountController.text),
+        onPressed: isBettingDisabled.value
+            ? null
+            : () => _bet(context, amountController.text),
         child: const Text("Parier"),
       ),
     ]);

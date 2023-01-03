@@ -12,7 +12,7 @@ class SelectedTournamentsState extends Equatable {
   factory SelectedTournamentsState.initial(MyTournament selectedTournament) =>
       SelectedTournamentsState(
         selectedTournament,
-        [],
+        const [],
       );
 
   copyWith({
