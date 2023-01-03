@@ -25,7 +25,7 @@ jobs:
       - run: flutter pub get
 
       # Build generated classes
-      # - run: flutter pub run build_runner build
+      - run: flutter pub run build_runner build
 
       # Analyze project
       - run: flutter analyze

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,14 +52,5 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       ); //TODO: lang
       emit(state.copyWith(loginState: LoginState.notLoggedIn));
     }
-  }
-
-  Map<String, dynamic> _parseIdToken(String idToken) {
-    final parts = idToken.split(r'.');
-    assert(parts.length == 3);
-
-    return jsonDecode(
-      utf8.decode(base64Url.decode(base64Url.normalize(parts[1]))),
-    );
   }
 }
